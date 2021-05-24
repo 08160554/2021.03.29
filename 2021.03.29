@@ -1,0 +1,41 @@
+Week06-1
+=========
+
+```C
+#include <GL/glut.h>
+#include <stdio.h>
+float vx[2000],vy[2000];  ///準備一個頂點
+int N=0;        ///有N個頂點
+float angle=0;
+void display()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glPushMatrix();    ///備份矩陣
+        glRotatef(angle,0,0,1);   ///旋轉，對Z軸轉
+        glScalef(0.5,0.1,0.1);    ///調成細長的
+        glColor3f(0.3,0.3,1.0);    ///藍色
+        glutSolidCube(1);    ///方塊
+
+    glPopMatrix();
+    glutSwapBuffers();
+}
+void motion (int x,int y)
+{
+    angle++;       ///只要mouse在motion時，就會增加角度
+    display();    ///增加後，重畫畫面
+}
+void keyboard(unsigned char key,int x,int y)
+{
+
+}
+int main(int argc,char ** argv)
+{
+    glutInit(&argc,argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH);
+    glutCreateWindow("08160554");
+    glutDisplayFunc(display);
+   // glutKeyboardFunc(keyboard);      ///按下去彈起來
+    glutMotionFunc(motion);    ///mouse motion 在動
+    glutMainLoop();
+}
+```
